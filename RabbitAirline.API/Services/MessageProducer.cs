@@ -22,12 +22,12 @@ public class MessageProducer : IMessageProducer, IDisposable
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
 
-        _channel.QueueDeclare(
+        _channel.QueueDeclare( //Cria a fila se não existir
             queue: "bookings", 
-            durable: true,
-            exclusive: false,
-            autoDelete: false,
-            arguments: null
+            durable: true, //Fila persistente
+            exclusive: false, //Pode ser acessada por outros canais
+            autoDelete: false, //Não será deletada quando o servidor for reiniciado
+            arguments: null //Não possui argumentos
         );
     }
 
